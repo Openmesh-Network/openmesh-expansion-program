@@ -1,0 +1,77 @@
+{
+  "type": "deployment",
+  "id": "OEPReserve",
+  "batch": "testnet",
+  "batchIndex": 0,
+  "deploymentAddress": "0xC939D1E0c5A6FAae5EdBcfe84239dDAD546FF495",
+  "constructorArgs": [],
+  "to": "0x4e59b44847b379578588920ca78fbf26c0b4956c",
+  "value": "0",
+  "data": "0x0000000000000000000000000000000000000000000000004f50454e4d45534860808060405234601457609990816100198239f35b5f80fdfe60808060405260043610156011575f80fd5b5f3560e01c63819b25ba146023575f80fd5b34605f576020366003190112605f5760043581527f904dcdc411e931497b95b06ddf8f8184815dd3bedc3c7c7cd4aed3ccd30783d860203392a2005b5f80fdfea264697066735822122078ed366a9d2b10c0df3e4a1f944616dbd6f49aa326c52903b7537c35f27ea1fe64736f6c63430008170033",
+  "gas": "87319",
+  "from": "0x6b221aA392146E31743E1beB5827e88284B09753",
+  "transactionSettings": {
+    "chainId": 11155111,
+    "nonce": "55",
+    "baseFee": "1571399804",
+    "priorityFee": "10000000"
+  },
+  "salt": "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000OPENMESH",
+  "artifact": {
+    "abi": [
+      { "type": "constructor", "inputs": [], "stateMutability": "nonpayable" },
+      {
+        "type": "function",
+        "name": "reserve",
+        "inputs": [
+          { "name": "amount", "type": "uint256", "internalType": "uint256" }
+        ],
+        "outputs": [],
+        "stateMutability": "nonpayable"
+      },
+      {
+        "type": "event",
+        "name": "Reserved",
+        "inputs": [
+          {
+            "name": "account",
+            "type": "address",
+            "indexed": true,
+            "internalType": "address"
+          },
+          {
+            "name": "amount",
+            "type": "uint256",
+            "indexed": false,
+            "internalType": "uint256"
+          }
+        ],
+        "anonymous": false
+      }
+    ],
+    "bytecode": "0x60808060405234601457609990816100198239f35b5f80fdfe60808060405260043610156011575f80fd5b5f3560e01c63819b25ba146023575f80fd5b34605f576020366003190112605f5760043581527f904dcdc411e931497b95b06ddf8f8184815dd3bedc3c7c7cd4aed3ccd30783d860203392a2005b5f80fdfea264697066735822122078ed366a9d2b10c0df3e4a1f944616dbd6f49aa326c52903b7537c35f27ea1fe64736f6c63430008170033",
+    "compiler": { "version": "v0.8.23+commit.f704f362" },
+    "contractName": "src/OEPReserve.sol:OEPReserve",
+    "jsonDescription": {
+      "language": "Solidity",
+      "sources": {
+        "src/OEPReserve.sol": {
+          "content": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.0;\n\ncontract OEPReserve {\n    event Reserved(address indexed account, uint256 amount);\n\n    constructor() {}\n\n    function reserve(uint256 amount) external {\n        emit Reserved(msg.sender, amount);\n    }\n}\n"
+        }
+      },
+      "settings": {
+        "remappings": ["forge-std/=lib/forge-std/src/"],
+        "optimizer": { "enabled": true, "runs": 200 },
+        "evmVersion": "shanghai",
+        "viaIR": true
+      },
+      "metadata": { "useLiteralContent": true }
+    },
+    "license": "MIT"
+  },
+  "source": "/home/plopmenz/openmesh-expansion-program",
+  "submitted": {
+    "transactionHash": "0x5d1f317e0e1730e4a3fcc9e4621a26de731541c7a6cd69d80f5a9bb91d655fb0",
+    "date": "2024-08-19T14:13:56.854Z"
+  }
+}

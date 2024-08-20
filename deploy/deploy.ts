@@ -1,63 +1,41 @@
 import { Address, Deployer } from "../web3webdeploy/types";
-import { DeployCounterSettings, deployCounter } from "./counters/Counter";
 import {
-  DeployProxyCounterSettings,
-  deployProxyCounter,
-} from "./counters/ProxyCounter";
-import {
-  SetInitialCounterValueSettings,
-  setInitialCounterValue,
-} from "./counters/SetInitialCounterValue";
+  DeployOEPReserveSettings,
+  deployOEPReserve,
+} from "./internal/OEPReserve";
 
-export interface DeploymentSettings {
-  counterSettings: DeployCounterSettings;
-  proxyCounterSettings: Omit<DeployProxyCounterSettings, "counter">;
-  setInitialCounterValueSettings: Omit<
-    SetInitialCounterValueSettings,
-    "counter"
-  >;
+export interface OEPDeploymentSettings {
+  oepReserveSettings: DeployOEPReserveSettings;
   forceRedeploy?: boolean;
 }
 
-export interface Deployment {
-  counter: Address;
-  proxyCounter: Address;
+export interface OEPDeployment {
+  oepReserve: Address;
 }
 
 export async function deploy(
   deployer: Deployer,
-  settings?: DeploymentSettings
-): Promise<Deployment> {
+  settings?: OEPDeploymentSettings
+): Promise<OEPDeployment> {
   if (settings?.forceRedeploy !== undefined && !settings.forceRedeploy) {
     const existingDeployment = await deployer.loadDeployment({
-      deploymentName: "V1.json",
+      deploymentName: "latest.json",
     });
     if (existingDeployment !== undefined) {
       return existingDeployment;
     }
   }
 
-  const counter = await deployCounter(
+  const oepReserve = await deployOEPReserve(
     deployer,
-    settings?.counterSettings ?? {}
+    settings?.oepReserveSettings ?? {}
   );
-  const proxyCounter = await deployProxyCounter(deployer, {
-    ...(settings?.proxyCounterSettings ?? {}),
-    counter: counter,
-  });
-  await setInitialCounterValue(deployer, {
-    ...(settings?.setInitialCounterValueSettings ?? {
-      counterValue: BigInt(3),
-    }),
-    counter: counter,
-  });
 
-  const deployment = {
-    counter: counter,
-    proxyCounter: proxyCounter,
+  const deployment: OEPDeployment = {
+    oepReserve: oepReserve,
   };
   await deployer.saveDeployment({
-    deploymentName: "V1.json",
+    deploymentName: "latest.json",
     deployment: deployment,
   });
   return deployment;

@@ -1,15 +1,16 @@
 import { Address, DeployInfo, Deployer } from "../../web3webdeploy/types";
-export interface DeployCounterDeployerSettings
+
+export interface DeployOEPReserveSettings
   extends Omit<DeployInfo, "contract" | "args"> {}
 
-export async function deployCounterDeployer(
+export async function deployOEPReserve(
   deployer: Deployer,
-  settings: DeployCounterDeployerSettings
+  settings: DeployOEPReserveSettings
 ): Promise<Address> {
   return await deployer
     .deploy({
-      id: "CounterDeployer",
-      contract: "CounterDeployer",
+      id: "OEPReserve",
+      contract: "OEPReserve",
       ...settings,
     })
     .then((deployment) => deployment.address);
